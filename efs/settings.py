@@ -25,7 +25,7 @@ SECRET_KEY = '&8yt11zt15-(1cj(#x6ehapfvyb(8#gah3(iao+kv7hemzol18'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -120,5 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = '/home'

@@ -8,29 +8,18 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     </head>
-    <body>
-    <style>
-        body {
-            background-color: beige;
-        }
+        <style>
+        .btn-primary {
+    background-color: lightslategray;
+     color: white;
+}
     </style>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Welcome!</div>
-                    <div class="panel-body">
-                        Eagle Financial Services, your Midwest Financial Services Partner.
-                    </div>
-        </div>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <h2 style="padding-left: 15Px">Customer Information</h2>
     </div>
     <div>
-        <table class="table table-striped table-bordered table-hover">
+        <table id="customers">
             <thead>
             <tr class="bg-info">
                 <th>Customer Number</th>
@@ -41,7 +30,7 @@
                 <th>Zip</th>
                 <th>Primary Email</th>
                 <th>Cell Phone</th>
-                <th colspan="3">Actions</th>
+                <th colspan="4">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -55,15 +44,18 @@
                     <td>{{ customer.zipcode }}</td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.cell_phone }}</td>
-                    <td><a href="{% url 'portfolio:customer_edit' pk=customer.pk %}" class="btn btn-warning">Edit</a></td>
-                     <td><a href="{% url 'portfolio:customer_delete' pk=customer.pk %}"
-                           onclick="return confirm('Are you sure you want to delete?')"
-                           class="btn btn-danger">Delete</a>
+                    <td><a href="{% url 'portfolio:customer_edit' pk=customer.pk %}" class="btn btn-primary">Edit</a></td>
+
+                    <td><a href="{% url 'portfolio:portfolio' pk=customer.pk %}"
+                           class="btn btn-primary">Portfolio</a>
+
+ <td><a href="{% url 'portfolio:portfolio_pdf' pk=customer.pk %}"
+                           class="btn btn-primary">Generate PDF</a>
                     </td>
-
-                    <td><a href=""
-                           class="btn btn-primary">Portfolio</a></td>
-
+                    <td><a href="{% url 'portfolio:customer_delete' pk=customer.pk %}"
+                           onclick="return confirm('Are you sure you want to delete?')"
+                           class="btn btn-danger glyphicon glyphicon-trash"></a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -31,15 +31,25 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'portfolio',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'portfolio',
     'crispy_forms',
+    'rest_framework',
+    'mathfilters',
+    'django.contrib.humanize',
+    'easy_pdf',
 ]
+
+EMAIL_HOST = 'smtp.gmail.com' # mail service smtp
+EMAIL_HOST_USER = 'eaglefs.resetpwd' # email id
+EMAIL_HOST_PASSWORD = 'assignment2' #password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

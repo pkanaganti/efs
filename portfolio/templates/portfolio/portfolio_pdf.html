@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<style type="text/css">
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #cecfd5;
+  padding: 5px 10px;
+}
+
+</style>
+
+</head>
+{% load mathfilters %}
+{% load humanize %}
+
+<div class="row">
+    <h1 style="text-align: center; font-family: Arial; color: darkblue; font-size: 160%; ">Customer Portfolio</h1>
+</div>
+
+<div class="row">
+    <h1 style="padding-left: 15Px">Overall Portfolio Performance</h1>
+</div>
+<div>
+ 	<table class="table">
+            <thead>
+            <tr class="bg-info">
+                <th>Portfolio Initial Investments</th>
+                <th>Portfolio Current Investments</th>
+                <th>Grand Total Results</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{  sum_acquired_value.acquired_value__sum|add:sum_of_initial_stock_value|intcomma }}</td>
+                    <td>{{ sum_recent_value.recent_value__sum |addition:sum_current_stocks_value|intcomma }}</td>
+                    <td>{{sum_recent_value.recent_value__sum |addition:sum_current_stocks_value |sub:sum_acquired_value.acquired_value__sum |sub:sum_of_initial_stock_value|intcomma}}</td>
+                    <!--<td>{{ sum_recent_value|add:sum_current_stocks_value|add:sum_acquired_value|add:sum_of_initial_stock_value|intcomma }}</td>-->
+                </tr>
+
+            </tbody>
+        </table>
+</div>
+
+<div class="row">
+    <h1 style="padding-left: 15Px">Stocks Information</h1>
+</div>
+<div class="row">
+    <table class="table">
+        <thead>
+        <tr class="bg-info">
+            <th scope="col">Customer</th>
+            <th scope="col">Symbol</th>
+            <th colspan="2">Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Initial Stock Price</th>
+            <th scope="col">Initial Stock Value</th>
+            <th scope="col">Current Stock Price</th>
+            <th scope="col">Current Stock Value</th>
+            <th scope="col">Results</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td scope="col">{{ stock.customer }}</td>
+                <td scope="col">{{ stock.symbol }}</td>
+                <td colspan="2">{{ stock.name }}</td>
+                <td scope="col"> {{ stock.shares|intcomma }}</td>
+                <td scope="col">{{ stock.purchase_price|intcomma }}</td>
+                <td scope="col">{{ stock.initial_stock_value|intcomma}}</td>
+                <td scope="col">{{ stock.current_stock_price|intcomma }}</td>
+                <td scope="col">{{ stock.current_stock_value|intcomma}}</td>
+                <td scope="col">{{ sum_of_initial_stock_value|add:sum_current_stocks_value|intcomma}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+<div>
+ 	<table class="table">
+            <thead>
+            <tr class="bg-info">
+                <th>Total Initial Stocks</th>
+                <th>Total Current Stocks</th>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ sum_of_initial_stock_value}}</td>
+                    <td>{{ sum_current_stocks_value }}</td>
+                    <td>{{ sum_of_initial_stock_value|add:sum_current_stocks_value|intcomma}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+
+<div class="row">
+    <h1 style="padding-left: 15Px">Investment Information</h1>
+</div>
+<div>
+ 	<table class="table">
+            <thead>
+            <tr class="bg-info">
+                <th scope="col">Customer Number</th>
+                <th scope="col">Category</th>
+                <th colspan="2">Description</th>
+                <th scope="col">Acquired Value</th>
+                <th scope="col">Acquired Date</th>
+                <th scope="col">Recent Value</th>
+                <th scope="col">Recent Date</th>
+                <th scope="col">Results</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for investment in investments %}
+                <tr>
+                    <td scope="col">{{ investment.customer }}</td>
+                    <td scope="col">{{ investment.category }}</td>
+                    <td colspan="2">{{ investment.description }}</td>
+                    <td scope="col">{{ investment.acquired_value |intcomma}}</td>
+                    <td scope="col">{{ investment.acquired_date }}</td>
+                    <td scope="col">{{ investment.recent_value |intcomma}}</td>
+                    <td scope="col">{{ investment.recent_date }}</td>
+                    <!--<td>{{ sum_recent_value.recent_value__sum |addition:sum_acquired_value.acquired_value__sum|intcomma }}</td>-->
+                    <td scope="col">{{ investment.recent_value|sub:investment.acquired_value |intcomma}}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+<br>
+
+<div>
+ 	<table class="table">
+            <thead>
+            <tr class="bg-info">
+                <th>Total of Initial Investments</th>
+                <th>Total of Current Investments</th>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ sum_acquired_value.acquired_value__sum|intcomma}}</td>
+                    <td>{{ sum_recent_value.recent_value__sum|intcomma}}</td>
+                    <td>{{ sum_recent_value.recent_value__sum |sub:sum_acquired_value.acquired_value__sum|intcomma}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+
+
+

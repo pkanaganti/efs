@@ -1,6 +1,13 @@
 {% extends "portfolio/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+<div class="card">
+  <div class="card-header">
+   <h1>Login Here</h1>
+  </div>
+    <div class="card-body">
+
     {% if form.errors %}
     <br />
     <p>Your username and password didn't match. Please try again.</p>
@@ -12,7 +19,10 @@
         {% csrf_token %}
 
 
-        <input type="submit" value="login"/>
+        <input type="submit" class="btn btn-primary" value="login"/>
+        <button class="btn btn-primary"> <a href="{% url 'portfolio:password_reset' %}" style="color: white">Forgot password?</a></button>
+        <br>
+        <p style="color: #0C0B4D">  If you don't have an account <a href="{% url 'portfolio:register' %}">Sign Up Here</a></p>
         <input type="hidden" name="next" value="{{ next }}"/>
     </form>
 {% endblock %}
